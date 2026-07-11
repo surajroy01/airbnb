@@ -25,7 +25,12 @@ const listingSchema = new Schema({
     reviews: [{
         type: Schema.Types.ObjectId,
         ref: "Review"
-    }]
+    }],
+
+    owner:{
+        type:Schema.Types.ObjectId,
+        ref:"User",
+    }
 })
 
 //creating post delete middleware for deleting review after that listing is deleted

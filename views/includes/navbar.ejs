@@ -22,22 +22,39 @@
         </div>
     </div> -->
 
-<nav class="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top">
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom sticky-top">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img class="logo" src="/images/logo.png" alt="">
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-        <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
         </button>
 
+
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+
             <div class="navbar-nav option">
-                <a class="nav-link active" href="/">Home</a>
-                <a class="nav-link" class="same" href="/listings">All Listings</a>
-                <a class="nav-link same" class="same" href="/listings/new">Add new listing</a>
+            <a class="nav-link active " href="/">Home</a>
+            <a class="nav-link  " class="same" href="/listings">All Listings</a>
+            <a class="nav-link " class="same" href="/listings/new">Add new listing</a>
+            <% if(!currUsr){ %>
+                    <a class="nav-link active" href="/signup">SignUp</a>
+                    <a class="nav-link same" class="same" href="/login">Log in</a>
+                    <% } %>
+                        <% if(currUsr){ %>
+                            <a class="nav-link same" class="same" href="/logout">Logout</a>
+                            <% } %>
             </div>
+            <!-- <div class="navbar-nav option">
+                
+            </div> -->
+
         </div>
+
+        
+    </div>
     </div>
 </nav>
