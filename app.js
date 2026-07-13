@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
@@ -17,9 +18,10 @@ const User = require("./models/user.js")
 const passportLocalMongoose = require("passport-local-mongoose")
 
 //database
-const MONGO_URL = "mongodb://127.0.0.1:27017/AIRBNB"
+// const MONGO_URL = "mongodb://127.0.0.1:27017/AIRBNB"
+const dbUrl = process.env.ATLAS_DB_URL
 async function main() {
-    await mongoose.connect(MONGO_URL)
+    await mongoose.connect(dbUrl)
 }
 main().then((res) => {
     console.log("connected successfully")
