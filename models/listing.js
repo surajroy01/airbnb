@@ -10,14 +10,9 @@ const listingSchema = new Schema({
         required: true,
     },
     description: String,
-    image: {
-        filename: String,
-        url: {
-            type: String,
-            default: "https://i.pinimg.com/1200x/e7/b9/0d/e7b90dfc8ab45cd25c18641be918a858.jpg",
-            set: (v) => v === "" ? undefined : v
-        },
-        // set:(v)=>v===""? "https://i.pinimg.com/1200x/e7/b9/0d/e7b90dfc8ab45cd25c18641be918a858.jpg":v,
+    image:{
+        url:String,
+        filename:String,
     },
     price: Number,
     location: String,
@@ -30,7 +25,18 @@ const listingSchema = new Schema({
     owner:{
         type:Schema.Types.ObjectId,
         ref:"User",
-    }
+    },
+    geometry: {
+    type: {
+        type: String,
+        enum: ["Point"],
+        required: true,
+    },
+    coordinates: {
+        type: [Number],
+        required: true,
+    },
+},
 })
 
 //creating post delete middleware for deleting review after that listing is deleted

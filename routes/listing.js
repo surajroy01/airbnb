@@ -3,37 +3,37 @@ const router = express.Router()
 const wrapAsync = require("../utils/wrapAsync.js")
 const Listing = require("../models/listing.js")
 const methodOverride = require("method-override")
-const {isLoggedIn, isOwner,validateListing}=require("../middlewares.js")
+const { isLoggedIn, isOwner, validateListing } = require("../middlewares.js")
 
-const listingController=require("../controllers/listing.js")
-
-//all listings
-router.get("/", wrapAsync(listingController.index))
+const listingController = require("../controllers/listing.js")
+const multer  = require('multer')
+const {storage} = require("../cloudConfig.js")
+// const upload = multer({ dest: 'uploads/' })//stores files in uploads folder temporarily
+const upload = multer({ storage })
+//combining same path having different routes
+router
+    .route("/")
+    .get(wrapAsync(listingController.index))//all listing
+    .post(isLoggedIn, 
+        validateListing,
+        upload.single('listing[image]'),
+        wrapAsync(listingController.createNewListing))//creating the listing
+//using try catch to handle server side validation or wrapAsync function
 
 //for new listing and authenticating user using middleware
 router.get(
-    "/new", isLoggedIn,listingController.newForm)
+    "/new", isLoggedIn, listingController.newForm)
 
-//creating the listing
-//using try catch to handle server side validation or wrapAsync function 
-router.post(
-    "/",isLoggedIn, validateListing, wrapAsync(listingController.createNewListing))
+router.route("/:id")
+    .put(isLoggedIn, isOwner,upload.single('listing[image]'), validateListing, wrapAsync(listingController.updateListing))//updating
+
+    .delete(isLoggedIn, isOwner, wrapAsync(listingController.deleteListing))//deleting particular listing
+
+    .get(wrapAsync(listingController.showListing))//particular hotel//show route
 
 //editing single listing
 router.get(
-    "/:id/edit",isLoggedIn,isOwner, wrapAsync(listingController.editListing))
-
-//updating
-router.put(
-    "/:id", isLoggedIn,isOwner,validateListing, wrapAsync(listingController.updateListing))
-
-//deleting particular listing
-router.delete(
-    "/:id",isLoggedIn,isOwner,wrapAsync(listingController.deleteListing))
-
-//particular hotel//show route
-router.get(
-    "/:id", wrapAsync(listingController.showListing))
+    "/:id/edit", isLoggedIn, isOwner, wrapAsync(listingController.editListing))
 
 
 // router.get("/mylisting",async (req,res)=>{

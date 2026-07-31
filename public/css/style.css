@@ -203,3 +203,9 @@ body{
     padding-left: 16px;
     font-style: italic;
 }
+
+/* map */
+#map { 
+    height: 200px;
+    width:80vh;
+}

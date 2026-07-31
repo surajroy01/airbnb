@@ -10,7 +10,7 @@ module.exports.listingSchema=Joi.object({
         image:Joi.object({
             filename:Joi.string().allow("",null).required(),
             url:Joi.string().allow("",null).default("https://i.pinimg.com/1200x/e7/b9/0d/e7b90dfc8ab45cd25c18641be918a858.jpg")
-        }).required(),//no value or default value
+        }),//no value or default value
     }).required()
 })
 

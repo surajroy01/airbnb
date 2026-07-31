@@ -4,7 +4,8 @@
             <b>
                 <h3>Edit this Listing</h3>
             </b>
-            <form method="post" action="/listings/<%= listing._id %>?_method=put" class="needs-validation" novalidate>
+            <form method="post" action="/listings/<%= listing._id %>?_method=put" class="needs-validation" novalidate
+                enctype="multipart/form-data">
 
                 <div class="mb-3">
                     <label for="title" class="">Enter Title</label>
@@ -22,6 +23,19 @@
                     <div class="invalid-feedback">
                         Please give description!
                     </div>
+                </div>
+
+                <div class="mb-3 column" >
+                    Original Listing Image <br>
+                    <img src="<%= originalImageUrl %>" alt="">
+
+                </div>
+
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload New Image</label>
+
+                    <input class="form-control" type="file" name="listing[image]">
+
                 </div>
 
                 <div class="row">
@@ -56,34 +70,9 @@
                 </div>
 
 
-
-
-
-
-                <div class="mb-3">
-                    <label for="image" class="form-label">Image</label>
-                    <input class="form-control" type="text" value="<%= listing.image.url %>" name="listing[image][url]"
-                        required>
-                    <div class="invalid-feedback">
-                        Please provide image url!
-                    </div>
-                </div>
-
-
-                <div class="mb-3">
-                    <label for="filename" class="form-label">Filename</label>
-                    <input class="form-control" type="text" value="<%= listing.image.filename %>"
-                        name="listing[image][filename]" required>
-                    <div class="invalid-feedback">
-                        Please provide valid filename!
-                    </div>
-                </div>
-
-
                 <div class=" mb-3 ">
                     <button type="submit" class="btn">Update</button>
                 </div>
             </form>
         </div>
     </div>
-   

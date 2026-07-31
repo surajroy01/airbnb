@@ -4,10 +4,10 @@ const initData = require("./data.js")//for data
 const Listing = require("../models/listing.js")//for schema
 
 //database connectivity
-// const MONGO_URL = "mongodb://127.0.0.1:27017/AIRBNB"
-const dbUrl = process.env.ATLAS_DB_URL
+const MONGO_URL = "mongodb://127.0.0.1:27017/AIRBNB"
+
 async function main() {
-    await mongoose.connect(dbUrl)
+    await mongoose.connect(MONGO_URL)
 }
 main()
     .then((res) => {
